@@ -1,6 +1,12 @@
+import { Routes, Route } from "react-router";
+import { Home, SignUp, SignIn, Details, Create, Profile} from "./pages/index.js";
 
 export default function App() {
   return (
-    <h1 className="text-blue-500">HELLO WORLD</h1>
+    <Routes>
+      <Route path="/" element={Home} />
+      <Route path="/home" element={Home} />
+      <Route path="signup" element={} />
+    </Routes>
   )
 }
