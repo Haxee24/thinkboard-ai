@@ -1,33 +1,21 @@
-import { Link } from "react-router";
+import {Link} from "react-router";
 
-function Signup() {
+function SignIn() {
   return (
     <div className="-mt-20 -mb-10 min-h-screen flex items-center justify-center text-white">
-      <div className="flex h-150 w-full max-w-md md:max-w-4xl bg-[#242425] p-8 rounded-2xl shadow-lg">
-        <img width={450} src="signup/hero5.png" alt="" className="hidden md:block" />
+      <div className="flex w-full h-150 max-w-md md:max-w-4xl bg-[#242425] p-8 rounded-2xl shadow-lg">
+        <img width={450} src="signup/hero2.png" alt="" className="hidden md:block" />
         <div className="flex flex-col justify-center px-8">
           <h2 className="text-3xl font-extrabold font-mono mb-6 text-center">
-            Sign Up
+            Login
           </h2>
 
           <form className="space-y-4">
-            {/* Full Name */}
-            <div>
-              <label className="block text-sm mb-1">Full Name</label>
-              <input
-                name="fullname"
-                required
-                type="text"
-                placeholder="John Doe"
-                className="w-full px-4 py-2 rounded-lg bg-[#1a1a1b] border border-white/10 focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
-            </div>
 
             {/* Username */}
             <div>
-              <label className="block text-sm mb-1">Username</label>
+              <label className="block text-sm mb-1">Username or Email</label>
               <input
-                name="username"
                 required
                 type="text"
                 placeholder="johndoe"
@@ -35,23 +23,10 @@ function Signup() {
               />
             </div>
 
-            {/* Email */}
-            <div>
-              <label className="block text-sm mb-1">Email</label>
-              <input
-                name="email"
-                required
-                type="email"
-                placeholder="john@example.com"
-                className="w-full px-4 py-2 rounded-lg bg-[#1a1a1b] border border-white/10 focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
-            </div>
-
             {/* Password */}
             <div>
               <label className="block text-sm mb-1">Password</label>
               <input
-                name="password"
                 required
                 type="password"
                 placeholder="••••••••"
@@ -70,9 +45,9 @@ function Signup() {
 
           {/* Footer */}
           <p className="text-sm text-center text-white/60 mt-6">
-            Already have an account?{" "}
+            New user?{" "}
             <span className="text-green-500 cursor-pointer hover:underline">
-              <Link to="/signin">Login</Link>
+              <Link to="/signup">Sign up</Link>
             </span>
           </p>
         </div>
@@ -80,5 +55,4 @@ function Signup() {
     </div>
   );
 }
-
-export default Signup
+export default SignIn
