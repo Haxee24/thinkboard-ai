@@ -24,12 +24,10 @@ export default function NoteForm() {
                 body: JSON.stringify({title, info})
             });
             const data = await res.json();
-            console.log(data);
             const newNote = data.newNote;
 
 
             setNotes(prev => [...prev, newNote]);
-            console.log(newNote);
         } catch (err) {
             console.log(err);
         }
@@ -48,6 +46,7 @@ export default function NoteForm() {
                 <div>
                     <label className="block text-sm mb-1">Title</label>
                     <input
+                    name="title"
                     type="text"
                     required
                     value={title}
@@ -59,6 +58,7 @@ export default function NoteForm() {
                 <div>
                     <label className="block text-sm mb-1">Info</label>
                     <textarea
+                    name="info"
                     required
                     rows={4}
                     value={info}

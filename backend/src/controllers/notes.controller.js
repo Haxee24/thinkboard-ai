@@ -17,13 +17,14 @@ export const getAllNotes = async (req, res) => {
 
 export const createNote = async (req, res) => {
     try {
-        const {title, content} = req.body;
+        const {title, content, info} = req.body;
         const user = req.user;
         if (!title){
             return res.status(400).json({message: "Title not entered"});
         }
         const newNote = await Note.create({
             title,
+            info,
             content,
             maker: user._id
         });
