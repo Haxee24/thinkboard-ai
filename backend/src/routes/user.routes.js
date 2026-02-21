@@ -8,5 +8,8 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/profile", authMiddleware, getProfile);
 router.post("/logout", authMiddleware, logoutUser);
+router.route(":id").get(authMiddleware, getProfile)
+
+
 
 export default router;

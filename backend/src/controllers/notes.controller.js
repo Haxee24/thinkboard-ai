@@ -15,6 +15,24 @@ export const getAllNotes = async (req, res) => {
     }
 }
 
+export const deleteNote = async (req, res) => {
+    try {
+        const noteId = req.params.id;
+        const user = req.user;  
+        const note = await Note.findOne({_id: noteId, maker: user._id});
+        if (!note) {
+            return res.status(404).json({message: "Note not found"});
+        }
+        await note.deleteOne({_id: noteId});
+        user.notes.pull(noteId);
+        await user.save();
+        return res.status(200).json({message: "Note deleted successfully", deletedNoteId: noteId});
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({message: "Error deleting note"});
+    }
+}
+
 export const createNote = async (req, res) => {
     try {
         const {title, content, info} = req.body;
