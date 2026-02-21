@@ -1,12 +1,13 @@
 import AuthContext from "./authContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function AuthProvider({children}) {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const checkAuth = async () => {
         try {
-            const res = await fetch('http://localhost:4000/spi/users/profile', {
+            const res = await fetch('http://localhost:4000/api/users/profile', {
                 method: 'GET',
                 credentials: 'include',
             });
@@ -15,10 +16,13 @@ export function AuthProvider({children}) {
                 setUser(data.user);
             } else {
                 setUser(null);
+                throw new Error('Failed to fetch user profile');
             }
         } catch (err) {
             console.log(err);
             setUser(null);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -27,15 +31,25 @@ export function AuthProvider({children}) {
     }
     
     const logout = async () => {
-        await fetch('http://localhost:5000/api/logout', {
+        await fetch('http://localhost:4000/api/users/logout', {
             method: 'POST',
             credentials: 'include',
         });
         setUser(null);
     }
 
+    useEffect(() => {
+        checkAuth();
+    }, []);
+
     return (
-        <AuthContext.Provider value={{user, login, logout}}>
+        <AuthContext.Provider value={{
+            user,
+            login,
+            logout,
+            loading,
+            isAuthenticated: !!user
+        }}>
             {children}
         </AuthContext.Provider>
     )
