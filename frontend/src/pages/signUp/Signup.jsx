@@ -1,6 +1,34 @@
 import { Link } from "react-router";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 function Signup() {
+  const [form, setForm] = useState({
+    fullname: "",
+    username: "",
+    email: "",
+    password: ""
+  });
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+      const res = await fetch("http://localhost:4000/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      });
+      const data = await res.json();
+      toast.success("Account created successfully!");
+      navigate("/signin");
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="-mt-20 -mb-10 min-h-screen flex items-center justify-center text-white">
       <div className="flex h-150 w-full max-w-md md:max-w-4xl bg-[#242425] p-8 rounded-2xl shadow-lg">
@@ -10,12 +38,14 @@ function Signup() {
             Sign Up
           </h2>
 
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/* Full Name */}
             <div>
               <label className="block text-sm mb-1">Full Name</label>
               <input
                 name="fullname"
+                value={form.fullname}
+                onChange={(e)=> setForm({...form, fullname: e.target.value})}
                 required
                 type="text"
                 placeholder="John Doe"
@@ -29,6 +59,8 @@ function Signup() {
               <input
                 name="username"
                 required
+                value={form.username}
+                onChange={(e)=> setForm({...form, username: e.target.value})}
                 type="text"
                 placeholder="johndoe"
                 className="w-80 px-4 py-2 rounded-lg bg-[#1a1a1b] border border-white/10 focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -41,6 +73,8 @@ function Signup() {
               <input
                 name="email"
                 required
+                value={form.email}
+                onChange={(e)=> setForm({...form, email: e.target.value})}
                 type="email"
                 placeholder="john@example.com"
                 className="w-full px-4 py-2 rounded-lg bg-[#1a1a1b] border border-white/10 focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -53,6 +87,8 @@ function Signup() {
               <input
                 name="password"
                 required
+                value={form.password}
+                onChange={(e) => setForm({...form, password: e.target.value})}
                 type="password"
                 placeholder="••••••••"
                 className="w-full px-4 py-2 rounded-lg bg-[#1a1a1b] border border-white/10 focus:outline-none focus:ring-2 focus:ring-green-500"

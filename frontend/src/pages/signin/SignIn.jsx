@@ -2,6 +2,7 @@ import {Link} from "react-router";
 import { useAuth } from "../../context/authContext";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "react-hot-toast";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -24,6 +25,14 @@ function SignIn() {
       });
       const data = await res.json();
       console.log(data);
+      toast.success("Logged in successfully!", {
+        duration: 3000,
+        style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+      });
       login(data.user);
       navigate("/");
     } catch (err) {

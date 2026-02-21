@@ -51,8 +51,17 @@ function Header() {
                 {/* Dropdown */}
                 {open && (
                 <div className=" absolute right-0 top-17 w-44 bg-[#242425] rounded-lg shadow-lg border border-white/10">
-                    <button onClick={(e) => {navigate("/profile")}} className="cursor-pointer w-full text-left px-4 py-3 hover:bg-white/10">
+                    <button onClick={(e) => {
+                        setOpen(false);
+                        navigate("/profile");
+                    }} className="cursor-pointer w-full text-left px-4 py-3 hover:bg-white/10">
                     Profile
+                    </button>
+                    <button onClick={(e) => {
+                        setOpen(false);
+                        navigate("/");
+                    }} className="cursor-pointer w-full text-left px-4 py-3 hover:bg-white/10">
+                    Notes
                     </button>
                     <button onClick={(e) => {
                         logout();
