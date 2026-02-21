@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <div>&copy; ThinkBoard</div>
+    <div>&copy; ThinkSpace</div>
   )
 }
 

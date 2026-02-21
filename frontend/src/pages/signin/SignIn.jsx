@@ -1,6 +1,30 @@
 import {Link} from "react-router";
+import { useAuth } from "../../context/authContext";
+import { useState } from "react";
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try{
+    const res = await fetch("http://localhost:4000/api/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify(form)
+    });
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 function SignIn() {
+  const [form, setForm] = useState({
+    userid: "",
+    password: ""
+  });
   return (
     <div className="-mt-20 -mb-10 min-h-screen flex items-center justify-center text-white">
       <div className="flex w-full h-150 max-w-md md:max-w-4xl bg-[#242425] p-8 rounded-2xl shadow-lg">
@@ -10,13 +34,16 @@ function SignIn() {
             Login
           </h2>
 
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
 
             {/* Username */}
             <div>
               <label className="block text-sm mb-1">Username or Email</label>
               <input
+                name="userid"
                 required
+                value={form.userid}
+                onChange={(e)=> setForm({...form, userid: e.target.value})}
                 type="text"
                 placeholder="johndoe"
                 className="w-80 px-4 py-2 rounded-lg bg-[#1a1a1b] border border-white/10 focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -27,8 +54,11 @@ function SignIn() {
             <div>
               <label className="block text-sm mb-1">Password</label>
               <input
+                name="password"
                 required
                 type="password"
+                value={form.password}
+                onChange={(e) => setForm({...form, password: e.target.value})}
                 placeholder="••••••••"
                 className="w-full px-4 py-2 rounded-lg bg-[#1a1a1b] border border-white/10 focus:outline-none focus:ring-2 focus:ring-green-500"
               />

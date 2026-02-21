@@ -1,6 +1,6 @@
 function NotesCard({ title, content, createdAt }) {
   return (
-    <div className=" cursor-pointer bg-[#242425] w-100 border-t-10 text-white p-5 rounded-xl border-green-400 hover:border hover:border-t-10 hover:border-green-500 transition">
+    <div className=" cursor-pointer bg-[#130d0d] w-100 border-t-5 text-white p-5 rounded-xl border-green-400 hover:border hover:border-t-5 hover:border-green-500 transition">
       {/* Title */}
       <h3 className="text-xl font-semibold mb-2">
         {title}

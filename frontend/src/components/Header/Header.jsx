@@ -20,12 +20,12 @@ function Header() {
     }, []);
 
     return (
-        <div className="bg-[#1a1a1b] text-white">
+        <div className="bg-[#1b1919ad] text-white">
             <nav className="mx-auto h-20  flex items-center justify-between px-6">
             <div className='flex items-center'>
                 {/* <img width={80} src="logo.png" alt="" /> */}
                 <h1 className="text-4xl font-extrabold font-mono text-green-700">
-                ThinkBoard
+                ThinkSpace
                 </h1>
             </div>
 
