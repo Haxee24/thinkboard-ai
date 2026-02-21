@@ -1,11 +1,35 @@
 import NotesCard from "../../components/Notes/NoteCard"
+import { useState, useEffect } from "react";
 
 function Home() {
+  const [notes, setNotes] = useState([]);
+
+  async function fetchNotes(){
+    try{
+      const res = await fetch("http://localhost:4000/api/notes", {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await res.json();
+      return data.notes;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    async function loadNotes() {
+      const userNotes = await fetchNotes();
+      setNotes(userNotes);
+    }
+    loadNotes();
+  }, []);
+
   return (
     <div className="flex gap-5 p-10 flex-wrap">
-        <NotesCard title="First Note" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." createdAt="2024-06-01" />
-        <NotesCard title="Second Note" content="Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." createdAt="2024-06-02" />
-        <NotesCard title="Third Note" content="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." createdAt="2024-06-03" />
+        {notes.map(note => (
+          <NotesCard key={note._id} title={note.title} content={note.content} createdAt={note.createdAt} />
+        ))}
     </div>
   )
 }

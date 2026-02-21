@@ -42,7 +42,7 @@ function Header() {
                 {/* Profile Button */}
                 <button
                 onClick={() => setOpen(!open)}
-                className="cursor-pointer w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center font-bold hover:ring-2 hover:ring-green-500"
+                className="cursor-pointer w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center font-bold hover:ring-2 hover:ring-green-500"
                 >
                 H
                 </button>
