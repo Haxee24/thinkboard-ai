@@ -6,7 +6,7 @@ import { useAuth } from '../../context/authContext';
 function Header() {
     const [open, setOpen] = useState(false);
     const menuRef = useRef(null);
-    const {user} = useAuth();
+    const {user, logout} = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -54,7 +54,10 @@ function Header() {
                     <button onClick={(e) => {navigate("/profile")}} className="cursor-pointer w-full text-left px-4 py-3 hover:bg-white/10">
                     Profile
                     </button>
-                    <button className="cursor-pointer w-full text-left px-4 py-3 text-red-500 hover:bg-white/10">
+                    <button onClick={(e) => {
+                        logout();
+                        setOpen(false);
+                    }} className="cursor-pointer w-full text-left px-4 py-3 text-red-500 hover:bg-white/10">
                     Logout
                     </button>
                 </div>
