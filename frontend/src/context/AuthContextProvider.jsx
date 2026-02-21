@@ -1,7 +1,7 @@
 import AuthContext from "./authContext";
 import { useState, useEffect } from "react";
 
-export function AuthProvider({children}) {
+export default function AuthProvider({children}) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 

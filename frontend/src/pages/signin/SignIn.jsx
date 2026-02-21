@@ -42,7 +42,7 @@ function SignIn() {
 
   return (
     <div className="-mt-20 -mb-10 min-h-screen flex items-center justify-center text-white">
-      <div className="flex w-full h-150 max-w-md md:max-w-4xl bg-[#242425] p-8 rounded-2xl shadow-lg">
+      <div className="flex w-full h-150 max-w-md md:max-w-4xl bg-[#0f0c0c] p-8 rounded-2xl shadow-lg">
         <img width={450} src="signup/hero2.png" alt="" className="hidden md:block" />
         <div className="flex flex-col justify-center px-8">
           <h2 className="text-3xl font-extrabold font-mono mb-6 text-center">

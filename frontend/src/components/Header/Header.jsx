@@ -2,11 +2,16 @@ import {useState, useRef, useEffect} from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router';
 import { useAuth } from '../../context/authContext';
+import NoteForm from '../Notes/NoteForm';
+import { useNotesContext } from '../../context/notesContext';
 
 function Header() {
     const [open, setOpen] = useState(false);
     const menuRef = useRef(null);
     const {user, logout} = useAuth();
+
+    const {showNoteForm, setShowNoteForm} = useNotesContext();
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,11 +28,14 @@ function Header() {
 
     return (
         <div className="bg-[#1b1919ad] text-white">
-            <nav className="mx-auto h-20  flex items-center justify-between px-6">
+            <nav className="mx-auto h-20 max-w-[95%]  flex items-center justify-between px-6">
             <div className='flex items-center'>
                 {/* <img width={80} src="logo.png" alt="" /> */}
                 <Link to="/" >
-                    <h1 className="cursor-pointer text-4xl font-extrabold font-mono text-green-700">
+                    <h1 className="text-4xl font-extrabold font-mono text-green-600 
+                         transition-all duration-300
+                         group-hover:text-green-400
+                         group-hover:drop-shadow-[0_0_10px_rgba(34,197,94,0.6)]">
                     ThinkSpace
                     </h1>
                 </Link>
@@ -35,7 +43,7 @@ function Header() {
 
             {user && <div className="flex items-center gap-4 relative" ref={menuRef}>
 
-                <button className="cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl">
+                <button onClick={() => setShowNoteForm(true)} className="cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl">
                     <span className=' text-2xl mr-1.5 -mt-1'>+</span> New Note
                 </button>
 
@@ -73,6 +81,7 @@ function Header() {
                 )}
             </div>}
             </nav>
+            {showNoteForm && <NoteForm onClose={() => setShowNoteForm(false)} />}
         </div>
     )
 }

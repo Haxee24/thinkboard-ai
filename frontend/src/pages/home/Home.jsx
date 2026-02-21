@@ -1,8 +1,9 @@
 import NotesCard from "../../components/Notes/NoteCard"
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useNotesContext } from "../../context/notesContext";
 
 function Home() {
-  const [notes, setNotes] = useState([]);
+  const {notes, setNotes} = useNotesContext();
 
   async function fetchNotes(){
     try{
@@ -23,12 +24,12 @@ function Home() {
       setNotes(userNotes);
     }
     loadNotes();
-  }, []);
+  }, [notes]);
 
   return (
     <div className="flex gap-5 p-10 flex-wrap">
         {notes.map(note => (
-          <NotesCard key={note._id} title={note.title} content={note.content} createdAt={note.createdAt} />
+          <NotesCard key={note._id} title={note.title} info={note.info} createdAt={note.createdAt} />
         ))}
     </div>
   )
