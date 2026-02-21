@@ -1,8 +1,11 @@
 import {useState, useRef, useEffect} from 'react';
+import { Link } from 'react-router';
+import { useAuth } from '../../context/authContext';
 
 function Header() {
     const [open, setOpen] = useState(false);
     const menuRef = useRef(null);
+    const {user} = useAuth();
 
     useEffect(() => {
         const handler = (e) => {
@@ -26,7 +29,7 @@ function Header() {
                 </h1>
             </div>
 
-            <div className="flex items-center gap-4 relative" ref={menuRef}>
+            {user && <div className="flex items-center gap-4 relative" ref={menuRef}>
 
                 <button className="cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl">
                     <span className=' text-2xl mr-1.5 -mt-1'>+</span> New Note
@@ -52,7 +55,7 @@ function Header() {
                     </button>
                 </div>
                 )}
-            </div>
+            </div>}
             </nav>
         </div>
     )

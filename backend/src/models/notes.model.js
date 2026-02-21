@@ -7,10 +7,14 @@ const noteSchema = new Schema({
         minLength: 1,
         maxLength: 100
     },
+    info: {
+        type: String,
+        default: "",
+        maxLength: 200
+    },
     content: {
         type: String,
         default: "",
-        maxLength: 1000
     },
     maker: {
         type: mongoose.Schema.Types.ObjectId,
