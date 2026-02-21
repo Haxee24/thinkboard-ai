@@ -1,30 +1,36 @@
 import {Link} from "react-router";
 import { useAuth } from "../../context/authContext";
 import { useState } from "react";
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try{
-    const res = await fetch("http://localhost:4000/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: "include",
-      body: JSON.stringify(form)
-    });
-    const data = await res.json();
-    console.log(data);
-  } catch (err) {
-    console.log(err);
-  }
-}
+import { useNavigate } from "react-router";
 
 function SignIn() {
+  const navigate = useNavigate();
+  const {login} = useAuth();
   const [form, setForm] = useState({
     userid: "",
     password: ""
   });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+      const res = await fetch("http://localhost:4000/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify(form)
+      });
+      const data = await res.json();
+      console.log(data);
+      login(data.user);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="-mt-20 -mb-10 min-h-screen flex items-center justify-center text-white">
       <div className="flex w-full h-150 max-w-md md:max-w-4xl bg-[#242425] p-8 rounded-2xl shadow-lg">
@@ -67,9 +73,9 @@ function SignIn() {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full mt-4 bg-green-500 text-black font-semibold py-2 rounded-xl hover:bg-green-400 transition"
+              className=" w-full mt-4 bg-green-500 text-black font-semibold py-2 rounded-xl hover:bg-green-400 transition"
             >
-              Create Account
+              Login
             </button>
           </form>
 

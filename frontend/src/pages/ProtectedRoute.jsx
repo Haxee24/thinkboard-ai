@@ -6,7 +6,7 @@ export default function ProtectedRoute() {
     const { user } = useAuth();
     const navigate = useNavigate();
     useEffect(() => {
-        if (user) {
+        if (!user) {
             navigate("/signup");
         }
     }, [user, navigate]);
