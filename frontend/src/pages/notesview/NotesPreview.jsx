@@ -1,10 +1,11 @@
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useNotesContext } from "../../context/notesContext";
 import { useState, useEffect } from "react";
 
 export default function NotePreview() {
   const { id } = useParams();
   const { notes } = useNotesContext();
+  const navigate = useNavigate();
 
   const note = notes.find((n) => n._id === id);
 
@@ -14,13 +15,31 @@ export default function NotePreview() {
 
   const saveHandler = async (e) => {
     e.preventDefault();
-    
+    try {
+      const res = await fetch(`http://localhost:4000/api/notes/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ title, info, content }),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to save note");
+      }
+      const data = await res.json();
+      console.log("Note saved:", data);
+      navigate("/home");
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
     if (note) {
       setTitle(note.title);
       setInfo(note.info);
+      setContent(note.content);
     }
   }, [note]);
 
