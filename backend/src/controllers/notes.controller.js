@@ -33,6 +33,40 @@ export const deleteNote = async (req, res) => {
     }
 }
 
+export const aiEnhanceNote = async (req, res) => {
+    try {
+        const client = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY
+        });
+        const prompt = `You are a personal journaling assistant.
+                        Your job is to turn messy, unorganized, stream-of-consciousness thoughts into a clean, readable journal entry.
+
+                        Rules:
+                        - Keep the user's tone, personality, and emotional intensity.
+                        - Do NOT sound like a therapist, coach, or AI.
+                        - Do NOT add advice unless the user explicitly asks for it.
+                        - Do NOT judge, moralize, or reframe emotionally.
+                        - Preserve slang, casual language, and imperfections when appropriate.
+                        - Organize thoughts naturally into paragraphs, but keep it human.
+                        - If the user is angry, sad, excited, or numb, reflect that honestly.
+                        - Do not invent events or emotions that the user did not mention.
+
+                        Write in first-person, as if the user wrote it themselves.`
+        const {content} = req.body;
+        const response = await client.responses.create({
+            model: "gpt-5.2",
+            input: `${content}\n ${prompt}`
+        });
+
+        const aiContent = response.choices[0].text.trim();
+        return res.status(200).json({aiContent, message: "Note enhanced with AI successfully"});
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({message: "Error enhancing note with AI"});
+    }
+}
+
 export const updateNote = async (req, res) => {
     try {
         const noteId = req.params.id;
