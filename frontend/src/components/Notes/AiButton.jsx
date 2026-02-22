@@ -14,7 +14,8 @@ function AiButton({content, setContent}) {
         throw new Error("Failed to get AI response");
       }
       const data = await res.json();
-      setContent(data.content);
+      console.log("AI response:", data);
+      setContent(data.aiContent);
     } catch (err) {
       console.log(err);
     }
