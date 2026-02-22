@@ -33,6 +33,24 @@ export const deleteNote = async (req, res) => {
     }
 }
 
+export const updateNote = async (req, res) => {
+
+    try {
+        const noteId = req.params.id;
+        const {title, content, info} = req.body;
+        const user = req.user;  
+        const note = await Note.findOne({_id: noteId, maker: user._id});
+        if (!note) {
+            return res.status(404).json({message: "Note not found"});
+        }
+        note.title = title || note.title;
+        note.content = content || note.content;
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({message: "Error updating note"});
+    }
+}
+
 export const createNote = async (req, res) => {
     try {
         const {title, content, info} = req.body;
