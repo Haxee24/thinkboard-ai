@@ -27,10 +27,12 @@ function Home() {
   }, [notes]);
 
   return (
-    <div className="flex gap-5 p-10 flex-wrap">
-        {notes?.map(note => (
-          <NotesCard key={note._id} _id={note._id} title={note.title} info={note.info} createdAt={note.createdAt} />
-        ))}
+    <div className="min-h-[85vh]">
+      <div className="flex gap-5 p-10 flex-wrap">
+          {notes?.map(note => (
+            <NotesCard key={note._id} _id={note._id} title={note.title} info={note.info} createdAt={note.createdAt} />
+          ))}
+      </div>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <div>&copy; ThinkSpace</div>
+    <div className='pt-4'>&copy; ThinkSpace</div>
   )
 }
 

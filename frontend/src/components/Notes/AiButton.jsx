@@ -22,7 +22,7 @@ function AiButton({content, setContent}) {
   }
 
   return (
-    <button onClick={getAiResponse} className=" w-35 cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl">
+    <button onClick={getAiResponse} className=" w-30 cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl">
       AI Rewrite
     </button>
   )

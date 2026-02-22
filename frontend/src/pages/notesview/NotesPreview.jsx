@@ -53,7 +53,7 @@ export default function NotePreview() {
   }
 
   return (
-    <div className="min-h-screen bg-[#130d0d] text-white px-6 py-10 flex justify-center">
+    <div className=" bg-[#130d0d] text-white px-6 py-10 flex justify-center">
       <form onSubmit={saveHandler} className="w-full max-w-4xl flex flex-col items-center">
 
         {/* Title */}
@@ -80,7 +80,7 @@ export default function NotePreview() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Start writing your thoughts here..."
-          className="w-full min-h-[70vh] resize-none bg-transparent
+          className="w-full min-h-[56vh] resize-none bg-transparent
                      text-lg leading-relaxed outline-none
                      placeholder-white/30"
         />
