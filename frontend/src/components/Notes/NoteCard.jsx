@@ -1,9 +1,17 @@
 import DeleteButton from "./DeleteButton";
+import { useNavigate } from "react-router";
 
 function NotesCard({ title, info, createdAt, _id }) {
-  
+  const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const navigate = useNavigate();
   return (
-    <div className=" cursor-pointer bg-[#130d0d] w-100 border-t-5 text-white p-5 rounded-xl border-green-400 hover:border hover:border-t-5 hover:border-green-500 transition">
+    <div onClick={() => navigate("/notes/"+_id)} className=" cursor-pointer bg-[#130d0d] w-100 border-t-5 text-white p-5 rounded-xl border-green-400 hover:border hover:border-t-5 hover:border-green-500 transition">
       {/* Title */}
       <div className="flex justify-between">
         <h3 className="text-xl font-semibold mb-2">
@@ -19,7 +27,7 @@ function NotesCard({ title, info, createdAt, _id }) {
 
       {/* Footer */}
       <div className="text-xs text-white/50">
-        {createdAt}
+        {formattedDate}
       </div>
     </div>
   );

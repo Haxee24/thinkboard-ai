@@ -3,7 +3,7 @@ import Create from "./create/Create";
 import SignUp from "./signUp/Signup";
 import SignIn from "./signin/SignIn";
 import Profile from "./profile/Profile";
-import Details from "./details/Details";
+import NotesPreview from "./notesview/NotesPreview";
 
 
-export {Home, Create, SignUp, SignIn, Details, Profile}
+export {Home, Create, SignUp, SignIn, NotesPreview, Profile}

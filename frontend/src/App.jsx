@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
-import { Home, SignUp, SignIn, Details, Create, Profile} from "./pages/index.js";
+import { Home, SignUp, SignIn, NotesPreview, Create, Profile} from "./pages/index.js";
 import Layout from "./pages/Layout.jsx";
 import { Toaster } from "react-hot-toast";
 
@@ -15,9 +15,9 @@ export default function App() {
           <Route element={<ProtectedRoute/>}>
             <Route index element={<Home/>} />
             <Route path="/home" element={<Home/>} />
-            <Route path="details" element={<Details/>} />
             <Route path="create" element={<Create/>} />
             <Route path="profile" element={<Profile/>} />
+            <Route path="notes/:id" element={<NotesPreview/>} />
           </Route>
         </Route>
       </Routes>
