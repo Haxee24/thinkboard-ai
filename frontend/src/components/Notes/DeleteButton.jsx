@@ -2,7 +2,8 @@ import { useNotesContext } from "../../context/notesContext";
 
 export default function DeleteButton({noteId}) {
     const {setNotes} = useNotesContext();
-    const deleteNote = async () => {
+    const deleteNote = async (e) => {
+        e.stopPropagation();
         try {
             const res = await fetch(`http://localhost:4000/api/notes/${noteId}`, {
                 method: "DELETE",
