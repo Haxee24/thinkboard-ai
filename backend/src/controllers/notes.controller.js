@@ -1,10 +1,6 @@
 import Note from "../models/notes.model.js";
 import OpenAI from "openai";
-import { GoogleGenAI } from "@google/generative-ai";
-
-const ai = new GoogleGenAI({
-    apiKey: process.env.GOOGLE_API_KEY
-});
+import { GoogleGenAI } from "@google/genai";
 
 export const getAllNotes = async (req, res) => {
     try {
@@ -41,8 +37,9 @@ export const deleteNote = async (req, res) => {
 
 export const aiEnhanceNote = async (req, res) => {
     try {
-        const client = new OpenAI({
-            apiKey: process.env.OPENAI_API_KEY
+        console.log("Received content for AI enhancement:\nPlease Wait...");
+        const client = new GoogleGenAI({
+            apiKey: process.env.GOOGLE_API_KEY
         });
         const prompt = `You are a personal journaling assistant.
                         Your job is to turn messy, unorganized, stream-of-consciousness thoughts into a clean, readable journal entry.
@@ -59,12 +56,12 @@ export const aiEnhanceNote = async (req, res) => {
 
                         Write in first-person, as if the user wrote it themselves.`
         const {content} = req.body;
-        const response = await client.responses.create({
-            model: "gpt-5.2",
-            input: `${content}\n ${prompt}`
+        const response = await client.models.generateContent({
+            model: "gemini-3-flash-preview",
+            contents: `${content}\n ${prompt}`
         });
 
-        const aiContent = response.choices[0].text.trim();
+        const aiContent = response?.text;
         return res.status(200).json({aiContent, message: "Note enhanced with AI successfully"});
 
     } catch (err) {
