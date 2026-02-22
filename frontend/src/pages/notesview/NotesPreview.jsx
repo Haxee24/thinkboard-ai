@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router";
 import { useNotesContext } from "../../context/notesContext";
 import { useState, useEffect } from "react";
+import AiButton from "../../components/Notes/AiButton";
 
 export default function NotePreview() {
   const { id } = useParams();
@@ -83,7 +84,10 @@ export default function NotePreview() {
                      text-lg leading-relaxed outline-none
                      placeholder-white/30"
         />
-        <input type="submit" className="w-35 cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl"  value="Save note" />
+        <div className="w-full flex justify-end gap-4 mt-6">
+          <input type="submit" className="w-35 cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl"  value="Save note" />
+          <AiButton content={content} setContent={setContent} />
+        </div>
       </form>
     </div>
   );

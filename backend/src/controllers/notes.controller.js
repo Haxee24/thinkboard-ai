@@ -1,4 +1,10 @@
 import Note from "../models/notes.model.js";
+import OpenAI from "openai";
+import { GoogleGenAI } from "@google/generative-ai";
+
+const ai = new GoogleGenAI({
+    apiKey: process.env.GOOGLE_API_KEY
+});
 
 export const getAllNotes = async (req, res) => {
     try {

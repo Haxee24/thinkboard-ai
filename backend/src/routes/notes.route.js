@@ -8,6 +8,6 @@ router.route('/').get(authenticateToken, getAllNotes).post(authenticateToken, cr
 router.route('/:id')
 .patch(authenticateToken, updateNote)
 .delete(authenticateToken, deleteNote);
-router.get(':id/ai-enhance', authenticateToken, aiEnhanceNote);
+router.post('/ai-enhance', aiEnhanceNote);
 
 export default router;
