@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, Navigate } from "react-router";
 import { useNotesContext } from "../../context/notesContext";
 import { useState, useEffect } from "react";
 import AiButton from "../../components/Notes/AiButton";
@@ -48,9 +48,7 @@ export default function NotePreview() {
 
   if (!note) {
     return (
-      <div className="p-10 text-white/60">
-        Note not found
-      </div>
+      <Navigate to={"/"} replace/>
     );
   }
 
@@ -72,7 +70,7 @@ export default function NotePreview() {
           onChange={(e) => setInfo(e.target.value)}
           placeholder="Untitled"
           className={`w-full bg-transparent text-[#635f5f] outline-none
-                     placeholder-white/30 -mt-4 mb-6 ${isGenerating? "opacity-40 cursor-not-allowed": "hover:bg-green-400"}`}
+                     placeholder-white/30 -mt-4 mb-6 ${isGenerating? "opacity-40 cursor-not-allowed": ""}`}
         />
 
         {/* Divider */}
@@ -84,9 +82,10 @@ export default function NotePreview() {
           disabled={isGenerating}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Start writing your thoughts here..."
-          className="w-full min-h-[56vh] resize-none bg-transparent
+          className={`w-full min-h-[56vh] resize-none bg-transparent
                      text-lg leading-relaxed outline-none
-                     placeholder-white/30 cool-scrollbar"
+                     placeholder-white/30 cool-scrollbar
+                     ${isGenerating && "text-gray-700"}`}
         />
         {isGenerating && (
           <div
@@ -98,7 +97,8 @@ export default function NotePreview() {
         )}
         <div className="w-full flex justify-end gap-4 mt-6">
           <input disabled={isGenerating} type="submit" className="w-35 cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl"  value="Save note" />
-          <AiButton disabled={isGenerating} content={content} setContent={setContent} setLoad={setIsGenerating} />
+          <AiButton w="30" capt="AI Rewrite" disabled={isGenerating} content={content} setContent={setContent} setLoad={setIsGenerating} prompt={false} />
+          <AiButton w="32" capt="AI Generate" disabled={isGenerating} content={content} setContent={setContent} setLoad={setIsGenerating} prompt={true} />
         </div>
       </form>
     </div>

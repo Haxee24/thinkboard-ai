@@ -1,4 +1,4 @@
-function AiButton({content, setContent, setLoad}) {
+function AiButton({w, capt, content, setContent, setLoad, prompt}) {
   const getAiResponse = async (e) => {
     e.preventDefault();
     setLoad(true);
@@ -9,7 +9,7 @@ function AiButton({content, setContent, setLoad}) {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({ content,  long: prompt?true:false}),
       });
       if (!res.ok) {
         throw new Error("Failed to get AI response");
@@ -25,8 +25,8 @@ function AiButton({content, setContent, setLoad}) {
   }
 
   return (
-    <button onClick={getAiResponse} className=" w-30 cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl">
-      AI Rewrite
+    <button onClick={getAiResponse} className={`w-${w} cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl`}>
+      {capt}
     </button>
   )
 }

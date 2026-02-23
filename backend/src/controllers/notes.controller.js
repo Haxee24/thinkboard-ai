@@ -40,6 +40,7 @@ export const deleteNote = async (req, res) => {
 
 export const aiEnhanceNote = async (req, res) => {
     try {
+        const {long} = req.body;
         console.log("Received content for AI enhancement:\nPlease Wait...");
 
         const prompt = `You are a personal journaling assistant.
@@ -54,7 +55,7 @@ export const aiEnhanceNote = async (req, res) => {
                         - Organize thoughts naturally into paragraphs, but keep it human.
                         - If the user is angry, sad, excited, or numb, reflect that honestly.
                         - Do not invent events or emotions that the user did not mention.
-
+                        ${long? "- Make it long": ""}
                         Write in first-person, as if the user wrote it themselves.`
         const {content} = req.body;
         const response = await client.models.generateContent({
