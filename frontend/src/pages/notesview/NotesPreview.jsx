@@ -48,7 +48,7 @@ export default function NotePreview() {
 
   if (!note) {
     return (
-      <Navigate to={"/"} replace/>
+      <Navigate to={"/"} replace />
     );
   }
 
