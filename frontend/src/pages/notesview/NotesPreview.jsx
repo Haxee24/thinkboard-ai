@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router";
 import { useNotesContext } from "../../context/notesContext";
 import { useState, useEffect } from "react";
 import AiButton from "../../components/Notes/AiButton";
+import AiThinkingAnimation from '../../components/Notes/AiThinkingAnimation'
 
 export default function NotePreview() {
   const { id } = useParams();
@@ -62,15 +63,16 @@ export default function NotePreview() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Untitled"
-          className="w-full bg-transparent text-4xl font-bold outline-none
-                     placeholder-white/30 mb-6"
+          className={`w-full bg-transparent text-4xl font-bold outline-none
+                     placeholder-white/30 mb-6 ${isGenerating ? "opacity-40 cursor-not-allowed" : ""}`}
+                     
         />
         <input
           value={info}
           onChange={(e) => setInfo(e.target.value)}
           placeholder="Untitled"
-          className="w-full bg-transparent text-[#635f5f] outline-none
-                     placeholder-white/30 -mt-4 mb-6"
+          className={`w-full bg-transparent text-[#635f5f] outline-none
+                     placeholder-white/30 -mt-4 mb-6 ${isGenerating? "opacity-40 cursor-not-allowed": "hover:bg-green-400"}`}
         />
 
         {/* Divider */}
@@ -96,7 +98,7 @@ export default function NotePreview() {
         )}
         <div className="w-full flex justify-end gap-4 mt-6">
           <input disabled={isGenerating} type="submit" className="w-35 cursor-pointer flex items-center bg-green-500 border hover:border-amber-100 font-semibold text-black px-5 py-3 rounded-3xl"  value="Save note" />
-          <AiButton content={content} setContent={setContent} setLoad={setIsGenerating} />
+          <AiButton disabled={isGenerating} content={content} setContent={setContent} setLoad={setIsGenerating} />
         </div>
       </form>
     </div>
