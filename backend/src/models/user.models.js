@@ -2,6 +2,8 @@ import mongoose, {Schema} from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const colors = ["red", "blue",  "green", "purple", "yellow"]
+
 const userSchema = new Schema({
     username: {
         type: String,
@@ -39,6 +41,11 @@ const userSchema = new Schema({
         type: String,
         default: "",
         select: false
+    },
+    color: {
+        type: String,
+        enum: colors,
+        default: () => colors[Math.floor(Math.random()*colors.length)]
     }
 }, {timestamps: true});
 

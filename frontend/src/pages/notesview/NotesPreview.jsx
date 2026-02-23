@@ -86,7 +86,7 @@ export default function NotePreview() {
           placeholder="Start writing your thoughts here..."
           className="w-full min-h-[56vh] resize-none bg-transparent
                      text-lg leading-relaxed outline-none
-                     placeholder-white/30"
+                     placeholder-white/30 cool-scrollbar"
         />
         {isGenerating && (
           <div
