@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNotesContext } from "../../context/notesContext";
+import { useNavigate } from "react-router";
 
 export default function NoteForm() {
     const [title, setTitle] = useState("");
     const [info, setInfo] = useState("");
     const {setShowNoteForm, setNotes} = useNotesContext();
+    const navigate = useNavigate();
 
     const onClose = () => {
         setTitle("");
@@ -28,6 +30,7 @@ export default function NoteForm() {
 
 
             setNotes(prev => [...prev, newNote]);
+            navigate("/");
         } catch (err) {
             console.log(err);
         }

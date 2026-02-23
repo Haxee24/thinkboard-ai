@@ -1,6 +1,7 @@
-function AiButton({content, setContent}) {
+function AiButton({content, setContent, setLoad}) {
   const getAiResponse = async (e) => {
     e.preventDefault();
+    setLoad(true);
     try{
       const res = await fetch(`http://localhost:4000/api/notes/ai-enhance`, {
         method: "POST",
@@ -18,6 +19,8 @@ function AiButton({content, setContent}) {
       setContent(data.aiContent);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoad(false);
     }
   }
 
