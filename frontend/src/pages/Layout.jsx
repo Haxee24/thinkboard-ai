@@ -5,7 +5,6 @@ import Footer from "../components/Footer/Footer"
 function Layout() {
     const colors = {
     blue: "bg-blue-700",
-    red: "bg-blue-700",
     yellow: "bg-yellow-700",
     red: "bg-red-700",
     purple: "bg-purple-700",
