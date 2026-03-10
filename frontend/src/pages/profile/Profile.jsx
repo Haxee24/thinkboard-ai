@@ -5,13 +5,6 @@ import NotesCard from "../../components/Notes/NoteCard";
 export default function Profile() {
   const { user } = useAuth();
   const { notes } = useNotesContext();
-  const colors = {
-    blue: "bg-blue-700",
-    red: "bg-blue-700",
-    yellow: "bg-yellow-700",
-    red: "bg-red-700",
-    purple: "bg-purple-700"
-  }
 
   const recentNotes = [...notes]
     .sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt))
