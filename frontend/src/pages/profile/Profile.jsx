@@ -5,6 +5,13 @@ import NotesCard from "../../components/Notes/NoteCard";
 export default function Profile() {
   const { user } = useAuth();
   const { notes } = useNotesContext();
+  const colors = {
+    blue: "bg-blue-700",
+    red: "bg-blue-700",
+    yellow: "bg-yellow-700",
+    red: "bg-red-700",
+    purple: "bg-purple-700"
+  }
 
   const recentNotes = [...notes]
     .sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt))
@@ -18,7 +25,7 @@ export default function Profile() {
         <div className="flex items-center gap-6 mb-10">
           {/* Avatar */}
           <div className={`w-20 h-20 rounded-full ${user.color? `bg-${user.color}-700`:"bg-blue-700"} flex items-center justify-center text-3xl font-bold`}>
-            {user?.username?.[0]?.toUpperCase() || "U"}
+            {user?.fullname?.[0]?.toUpperCase() || "U"}
           </div>
 
           {/* User Info */}
